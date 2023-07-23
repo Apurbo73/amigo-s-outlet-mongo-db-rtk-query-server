@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/Apurbo73/amigo-s-outlet-mongo-db-rtk-query-server/issues"
   },
-  "homepage": "https://github.com/Apurbo73/amigo-s-outlet-mongo-db-rtk-query-server#readme"
+  "homepage": "https://github.com/Apurbo73/amigo-s-outlet-mongo-db-rtk-query-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.4.0",
+    "nodemon": "^3.0.1"
+  }
 }
