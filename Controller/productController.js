@@ -1,4 +1,6 @@
 import product from "../Models/ProductModel.js";
+import cart from "../Models/CartModel.js";
+
 // add product controller:
 export const addProduct = async (req, res) => {
   try {
@@ -63,6 +65,48 @@ export const updateProduct = async (req, res) => {
 
     await update.save();
     return res.status(200).json(update);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
+
+
+// add product to cart controller:
+export const addToCart = async (req, res) => {
+  try {
+    console.log(`New Product is ${req.body}`);
+    const cartProduct = await cart.create({
+      name: req.body.name,
+      imageLink: req.body.imageLink,
+      category: req.body.category,
+      seller: req.body.seller,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      createdAt: Date.now()
+    });
+    await cartProduct.save();
+    return res.status(200).json(cartProduct);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
+// get all from cart:
+export const getAllFromCart = async (req, res) => {
+  try {
+    // console.log(req.body);
+    const cartList = await cart.find({}).sort({ createdAt: -1 });
+    return res.status(200).json(cartList);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+// remove From Cart:
+export const removeFromCart = async (req, res) => {
+  try {
+    const removeFromCart = await cart.findByIdAndDelete(req.params.id);
+    return res.status(200).json(removeFromCart);
   } catch (error) {
     return res.status(500).json(error.message);
   }
